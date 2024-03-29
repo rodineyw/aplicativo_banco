@@ -1,49 +1,38 @@
-# Sistema Bancário com Interface Gráfica
+# Sistema Bancário com Interface Gráfica em Python
 
-Este repositório contém o código-fonte de um sistema bancário simples desenvolvido em Python, utilizando a biblioteca Tkinter para criar a interface gráfica. O aplicativo permite realizar operações bancárias básicas, como depósito, saque e consulta de saldo.
+Este projeto é um sistema bancário simples com interface gráfica, desenvolvido em Python utilizando Tkinter. O sistema permite realizar operações bancárias básicas e agora inclui recursos avançados como login de usuário e formatação monetária.
 
 ## Funcionalidades
 
-- **Depósito**: Adiciona fundos à conta bancária.
-- **Saque**: Retira fundos da conta bancária, com verificação de saldo disponível.
-- **Extrato**: Exibe o saldo atual e limita o número de consultas para simular restrições operacionais.
-
-## Pré-requisitos
-
-Antes de iniciar, certifique-se de que você tem o Python instalado em sua máquina. Este projeto foi desenvolvido utilizando Python 3.10, mas deve ser compatível com versões Python 3.x.
+- **Login de Usuário**: Permite que múltiplos usuários acessem o sistema. Cada usuário tem sua própria conta corrente associada.
+- **Registro de Usuário**: Novos usuários podem se registrar, criando uma nova conta corrente automaticamente.
+- **Operações Bancárias**: Os usuários podem depositar, sacar e visualizar o saldo, que é exibido no formato monetário brasileiro (R$).
+- **Extrato Limitado**: Restrição de solicitações de extrato, melhorando a simulação de um sistema bancário real.
 
 ## Como executar
 
-1. Clone o repositório para a sua máquina local:
+1. Clone o repositório para sua máquina local usando `git clone`.
+2. Navegue até o diretório do projeto.
+3. Execute o comando `python app.py` para iniciar o aplicativo.
 
-   ```
-   git clone https://github.com/rodineyw/aplicativo_banco.git
-   ```
+## Tecnologias Utilizadas
 
-2. Navegue até o diretório do projeto:
+- Python
+- Tkinter
 
-   ```
-   cd sistema-bancario-tkinter
-   ```
+## Atualizações Recentes
 
-3. Execute o script Python:
+- Implementação do sistema de login e registro de usuários.
+- Formatação de valores em reais seguindo o padrão brasileiro.
 
-   ```
-   python app.py
-   ```
+## Contribuindo
 
-## Estrutura do Projeto
+Contribuições para melhorar o aplicativo são sempre bem-vindas. Sinta-se à vontade para clonar, propor melhorias ou abrir issues.
 
-- `app.py`: Contém a lógica principal do sistema bancário, incluindo a criação da interface gráfica e o gerenciamento das operações bancárias.
+## Artigo no LinkedIn
 
-## Contribuições
-
-Contribuições são bem-vindas! Se você tem melhorias ou correções, sinta-se à vontade para forkar o repositório e enviar um pull request.
+Confira meu [artigo no LinkedIn](https://www.linkedin.com/pulse/superando-desafios-curso-python-ai-backend-developer-da-wanderson-5ap2f/?trackingId=SRFojNYTSiyplldV%2FRe7Pg%3D%3D) onde discuto em detalhes as motivações, desafios e aprendizados deste projeto.
 
 ## Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo `LICENSE` para detalhes.
-
-## Contato
-
-Se você tiver qualquer dúvida ou sugestão, por favor, abra uma issue ou entre em contato diretamente através do seu e-mail de contato.
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo `LICENSE` para obter mais detalhes.
