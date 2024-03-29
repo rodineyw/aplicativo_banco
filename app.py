@@ -14,6 +14,10 @@ class ContaCorrente:
         self.usuario = usuario
         self.saldo = 0
 
+    @staticmethod
+    def formatar_valor(valor):
+        return f"R$ {valor:,.2f}".replace(",", "x").replace(".", ",").replace("x", ".")
+
     def depositar(self, valor):
         self.saldo += valor
 
@@ -29,7 +33,7 @@ class SistemaBancario(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Sistema Bancário")
-        self.geometry("300x200")
+        self.geometry("300x350")
         self.usuarios = []  # Lista de usuários e contas
         self.conta_atual = None
 
@@ -51,7 +55,8 @@ class SistemaBancario(tk.Tk):
         self.label_boas_vindas.config(
             text=f"Bem-vindo {self.conta_atual.usuario.nome}!"
         )
-        self.label_saldo = tk.Label(self, text=f"Saldo: R$ {self.conta_atual.saldo}")
+        saldo_formatado = ContaCorrente.formatar_valor(self.conta_atual.saldo)
+        self.label_saldo = tk.Label(self, text=f"Saldo: {saldo_formatado}")
         self.label_saldo.pack(pady=10)
 
         self.extrato_count = 0  # contador para solicitação de extrato
@@ -98,21 +103,22 @@ class SistemaBancario(tk.Tk):
         )
         if valor:
             self.conta_atual.depositar(valor)
-            self.label_saldo.config(text=f"Saldo: R$ {self.conta_atual.saldo}")
+            saldo_formatado = ContaCorrente.formatar_valor(self.conta_atual.saldo)
+            self.label_saldo.config(text=f"Saldo: {saldo_formatado}")
 
     def sacar(self):
         valor = simpledialog.askfloat(
             "Saque", "Digite o valor que deseja sacar:", parent=self
         )
         if valor and self.conta_atual.sacar(valor):
-            self.label_saldo.config(text=f"Saldo: R$ {self.conta_atual.saldo}")
+            saldo_formatado = ContaCorrente.formatar_valor(self.conta_atual.saldo)
+            self.label_saldo.config(text=f"Saldo: {saldo_formatado}")
         else:
             messagebox.showerror("Erro", "Saldo insuficiente.", parent=self)
 
     def extrato(self):
-        messagebox.showinfo(
-            "Extrato", f"Saldo atual: R$ {self.conta_atual.saldo}", parent=self
-        )
+        saldo_formatado = ContaCorrente.formatar_valor(self.conta_atual.saldo)
+        messagebox.showinfo("Extrato", f"Saldo atual: {saldo_formatado}", parent=self)
 
 
 if __name__ == "__main__":
