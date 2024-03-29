@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import simpledialog
+from tkinter import simpledialog, messagebox
 
 
 class sistema_bancario(tk.Tk):
@@ -9,6 +9,8 @@ class sistema_bancario(tk.Tk):
         self.geometry("200x200")
 
         self.saldo = 0  # Saldo inicial
+        self.extrato_count = 0  # contador para solicitação de extrato
+        self.extrato_limit = 3  # Limite de solicitação de extrato
 
         self.label_saldo = tk.Label(self, text=f"Saldo: R${self.saldo}")
         self.label_saldo.pack(pady=10)
@@ -45,8 +47,19 @@ class sistema_bancario(tk.Tk):
                 tk.messagebox.showerror("Erro", "Saldo insuficiente.")
 
     def extrato(self):
-        # Implementar a logica do extrato aqui
-        tk.messagebox.showinfo("Extrato", f"Saldo atual: R${self.saldo}")
+        if self.extrato_count < self.extrato_limit:
+            self.extrato_count += 1
+            messagebox.showinfo(
+                "Extrato",
+                f"Solicitação de extrato {self.extrato_count}.\nSaldo atual: R${self.saldo}",
+                parent=self,
+            )
+        else:
+            messagebox.showwarning(
+                "Limite atingido!",
+                f"Você já atingiu o limite de {self.extrato_limit} solicitações de extrato.",
+                parent=self,
+            )
 
 
 if __name__ == "__main__":
