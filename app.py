@@ -2,17 +2,47 @@ import tkinter as tk
 from tkinter import simpledialog, messagebox
 
 
-class sistema_bancario(tk.Tk):
-    def __init__(self):
+class Usuario:
+    def __init__(self, nome, cpf):
+        self.nome = nome
+        self.cpf = cpf
+
+
+class ContaCorrente:
+    def __init__(self, numero, usuario):
+        self.numero = numero
+        self.usuario = usuario
+        self.saldo = 0
+
+    def depositar(self, valor):
+        self.saldo += valor
+
+    def sacar(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+            return True
+        else:
+            return False
+
+    def transferir(self, conta_destino, valor):
+        if self.sacar(valor):
+            conta_destino.depositar(valor)
+            return True
+        else:
+            return False
+
+
+class SistemaBancario(tk.Tk):
+    def __init__(self, usuario):
         super().__init__()
+        self.conta = ContaCorrente(numero=1234, usuario=usuario)
         self.title("Sistema Bancário")
         self.geometry("200x200")
 
-        self.saldo = 0  # Saldo inicial
         self.extrato_count = 0  # contador para solicitação de extrato
         self.extrato_limit = 3  # Limite de solicitação de extrato
 
-        self.label_saldo = tk.Label(self, text=f"Saldo: R${self.saldo}")
+        self.label_saldo = tk.Label(self, text=f"Saldo: R${self.conta.saldo}")
         self.label_saldo.pack(pady=10)
 
         self.button_depositar = tk.Button(
@@ -27,31 +57,28 @@ class sistema_bancario(tk.Tk):
         self.button_extrato.pack(pady=5)
 
     def depositar(self):
-        # implementando a logica de deposito aqui
         deposito = simpledialog.askfloat(
-            "Despósito", "Digite o valor que deseja depositar:", parent=self
+            "Depósito", "Digite o valor que deseja depositar:", parent=self
         )
         if deposito is not None:
-            self.saldo += deposito
-            self.label_saldo.config(text=f"Saldo: R${self.saldo}")
+            self.conta.depositar(deposito)
+            self.atualizar_saldo()
 
     def sacar(self):
         saque = simpledialog.askfloat(
             "Saque", "Digite o valor que deseja sacar:", parent=self
         )
-        if saque is not None:
-            if saque <= self.saldo:
-                self.saldo -= saque
-                self.label_saldo.config(text=f"Saldo: R${self.saldo}")
-            else:
-                tk.messagebox.showerror("Erro", "Saldo insuficiente.")
+        if saque is not None and self.conta.sacar(saque):
+            self.atualizar_saldo()
+        else:
+            tk.messagebox.showerror("Erro", "Saldo insuficiente.", parent=self)
 
     def extrato(self):
         if self.extrato_count < self.extrato_limit:
             self.extrato_count += 1
             messagebox.showinfo(
                 "Extrato",
-                f"Solicitação de extrato {self.extrato_count}.\nSaldo atual: R${self.saldo}",
+                f"Solicitação de extrato {self.extrato_count}.\nSaldo atual: R${self.conta.saldo}",
                 parent=self,
             )
         else:
@@ -61,7 +88,11 @@ class sistema_bancario(tk.Tk):
                 parent=self,
             )
 
+    def atualizar_saldo(self):
+        self.label_saldo.config(text=f"Saldo: R${self.conta.saldo}")
+
 
 if __name__ == "__main__":
-    app = sistema_bancario()
+    usuario_info = Usuario(nome="Rodiney Wanderson", cpf="123.456.789-00")
+    app = SistemaBancario(usuario=usuario_info)
     app.mainloop()
