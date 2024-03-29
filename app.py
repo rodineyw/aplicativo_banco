@@ -24,26 +24,38 @@ class ContaCorrente:
         else:
             return False
 
-    def transferir(self, conta_destino, valor):
-        if self.sacar(valor):
-            conta_destino.depositar(valor)
-            return True
-        else:
-            return False
-
 
 class SistemaBancario(tk.Tk):
-    def __init__(self, usuario):
+    def __init__(self):
         super().__init__()
-        self.conta = ContaCorrente(numero=1234, usuario=usuario)
         self.title("Sistema Bancário")
-        self.geometry("200x200")
+        self.geometry("300x200")
+        self.usuarios = []  # Lista de usuários e contas
+        self.conta_atual = None
+
+        self.iniciar_interface()
+
+    def iniciar_interface(self):
+        self.label_boas_vindas = tk.Label(self, text="Bem-vindo ao Sistema Bancário!")
+        self.label_boas_vindas.pack(pady=10)
+
+        self.button_login = tk.Button(self, text="Login", command=self.login)
+        self.button_login.pack(pady=5)
+
+        self.button_registrar = tk.Button(
+            self, text="Registrar", command=self.registrar
+        )
+        self.button_registrar.pack(pady=5)
+
+    def atualizar_interface(self):
+        self.label_boas_vindas.config(
+            text=f"Bem-vindo {self.conta_atual.usuario.nome}!"
+        )
+        self.label_saldo = tk.Label(self, text=f"Saldo: R$ {self.conta_atual.saldo}")
+        self.label_saldo.pack(pady=10)
 
         self.extrato_count = 0  # contador para solicitação de extrato
         self.extrato_limit = 3  # Limite de solicitação de extrato
-
-        self.label_saldo = tk.Label(self, text=f"Saldo: R${self.conta.saldo}")
-        self.label_saldo.pack(pady=10)
 
         self.button_depositar = tk.Button(
             self, text="Depositar", command=self.depositar
@@ -56,43 +68,53 @@ class SistemaBancario(tk.Tk):
         self.button_extrato = tk.Button(self, text="Extrato", command=self.extrato)
         self.button_extrato.pack(pady=5)
 
+    def registrar(self):
+        nome = simpledialog.askstring("Registro", "Digite seu nome:", parent=self)
+        cpf = simpledialog.askstring("Registro", "Digite seu CPF:", parent=self)
+        if nome and cpf:  # Verifica se nome e cpf foram fornecidos
+            usuario = Usuario(nome, cpf)
+            self.usuarios.append(usuario)
+            conta = ContaCorrente(numero=len(self.usuarios), usuario=usuario)
+            messagebox.showinfo(
+                "Registro",
+                f"Usuario {nome} registrado com sucesso.\nNúmero da conta: {conta.numero}",
+                parent=self,
+            )
+
+    def login(self):
+        nome = simpledialog.askstring("Login", "Digite seu nome:", parent=self)
+        usuario = next((u for u in self.usuarios if u.nome == nome), None)
+        if usuario:
+            self.conta_atual = ContaCorrente(
+                numero=self.usuarios.index(usuario) + 1, usuario=usuario
+            )
+            self.atualizar_interface()
+        else:
+            messagebox.showerror("Erro", "Usuário não encontrado.", parent=self)
+
     def depositar(self):
-        deposito = simpledialog.askfloat(
+        valor = simpledialog.askfloat(
             "Depósito", "Digite o valor que deseja depositar:", parent=self
         )
-        if deposito is not None:
-            self.conta.depositar(deposito)
-            self.atualizar_saldo()
+        if valor:
+            self.conta_atual.depositar(valor)
+            self.label_saldo.config(text=f"Saldo: R$ {self.conta_atual.saldo}")
 
     def sacar(self):
-        saque = simpledialog.askfloat(
+        valor = simpledialog.askfloat(
             "Saque", "Digite o valor que deseja sacar:", parent=self
         )
-        if saque is not None and self.conta.sacar(saque):
-            self.atualizar_saldo()
+        if valor and self.conta_atual.sacar(valor):
+            self.label_saldo.config(text=f"Saldo: R$ {self.conta_atual.saldo}")
         else:
-            tk.messagebox.showerror("Erro", "Saldo insuficiente.", parent=self)
+            messagebox.showerror("Erro", "Saldo insuficiente.", parent=self)
 
     def extrato(self):
-        if self.extrato_count < self.extrato_limit:
-            self.extrato_count += 1
-            messagebox.showinfo(
-                "Extrato",
-                f"Solicitação de extrato {self.extrato_count}.\nSaldo atual: R${self.conta.saldo}",
-                parent=self,
-            )
-        else:
-            messagebox.showwarning(
-                "Limite atingido!",
-                f"Você já atingiu o limite de {self.extrato_limit} solicitações de extrato.",
-                parent=self,
-            )
-
-    def atualizar_saldo(self):
-        self.label_saldo.config(text=f"Saldo: R${self.conta.saldo}")
+        messagebox.showinfo(
+            "Extrato", f"Saldo atual: R$ {self.conta_atual.saldo}", parent=self
+        )
 
 
 if __name__ == "__main__":
-    usuario_info = Usuario(nome="Rodiney Wanderson", cpf="123.456.789-00")
-    app = SistemaBancario(usuario=usuario_info)
+    app = SistemaBancario()
     app.mainloop()
