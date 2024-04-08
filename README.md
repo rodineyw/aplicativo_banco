@@ -1,37 +1,34 @@
-# Sistema Bancário com Interface Gráfica em Python
+<div align="center">
+<img src="/python.png" width="300" alt="Capa Python e Computador">
+</div>
+E aí, galera? Vamos falar de um projeto maneiro que eu fiz: um sistema bancário com cara de game, só que é tudo programado em Python usando Tkinter. Simples, direto e, o melhor, cheio de funções de banco pra você brincar de gerente!
 
-Este projeto é um sistema bancário simples com interface gráfica, desenvolvido em Python utilizando Tkinter. O sistema permite realizar operações bancárias básicas e agora inclui recursos avançados como login de usuário e formatação monetária.
+Olha só o que rola nesse projeto:
 
-## Funcionalidades
+- **Login de Usuário:** Aqui você tem sua conta e entra no sistema como se fosse no seu banco online. Cada um com seu espaço, sacou?
+- **Registro de Usuário:** Se você é novo na área, tranquilo! Dá para criar uma conta na hora e já sair usando.
+- **Mexer na Grana:** Pode depositar, sacar e checar quanto de dinheiro você tem, tudo em real, bem a nossa cara.
+- **Extrato na medida:** Aqui a gente não abusa! Tem um limite de quantas vezes você pode pedir extrato, pra ficar mais com cara de banco real.
 
-- **Login de Usuário**: Permite que múltiplos usuários acessem o sistema. Cada usuário tem sua própria conta corrente associada.
-- **Registro de Usuário**: Novos usuários podem se registrar, criando uma nova conta corrente automaticamente.
-- **Operações Bancárias**: Os usuários podem depositar, sacar e visualizar o saldo, que é exibido no formato monetário brasileiro (R$).
-- **Extrato Limitado**: Restrição de solicitações de extrato, melhorando a simulação de um sistema bancário real.
+Quer testar? Siga os passos:
 
-## Como executar
+1. "Pega" o projeto no seu computador usando `git clone`.
+2. Vai até a pasta do projeto.
+3. Rola um `python app.py` para começar a brincadeira.
 
-1. Clone o repositório para sua máquina local usando `git clone`.
-2. Navegue até o diretório do projeto.
-3. Execute o comando `python app.py` para iniciar o aplicativo.
+Escolhi Python e Tkinter porque, além de serem tops, são fáceis de manusear, principalmente pra quem tá começando.
 
-## Tecnologias Utilizadas
+**Novidades fresquinhas:**
+- Coloquei um sistema de login e registro para a galera.
+- Agora a grana aparece em real, do jeitinho que conhecemos.
 
-- Python
-- Tkinter
+Se quiser dar uma força, melhorar algo, sua ajuda é muito bem-vinda! Clone, mexa e me mostra o que achou.
 
-## Atualizações Recentes
+E tem mais, escrevi um artigo no LinkedIn falando sobre toda essa aventura, confere lá!
 
-- Implementação do sistema de login e registro de usuários.
-- Formatação de valores em reais seguindo o padrão brasileiro.
+Ah, e sem esquecer, o projeto é tipo um livro aberto, tá na licença MIT, então pode usar e abusar, modificar, distribuir, o que quiser.
 
-## Contribuindo
-
-Contribuições para melhorar o aplicativo são sempre bem-vindas. Sinta-se à vontade para clonar, propor melhorias ou abrir issues.
-
-## Artigo no LinkedIn
-
-Confira meu [artigo no LinkedIn](https://www.linkedin.com/pulse/superando-desafios-curso-python-ai-backend-developer-da-wanderson-5ap2f/?trackingId=SRFojNYTSiyplldV%2FRe7Pg%3D%3D) onde discuto em detalhes as motivações, desafios e aprendizados deste projeto.
+E aí, bora entrar nesse banco digital e fazer acontecer? Flw, galera! 🚀
 
 ## Licença
 
