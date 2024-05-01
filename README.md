@@ -1,5 +1,7 @@
 <div align="center">
-<img src="/assets/python.png" width="300" alt="Capa Python e Computador">
+
+[![Apresentação do Aplicativo.]](<iframe width="560" height="315" src="https://www.youtube.com/embed/dECs8imYXU0?si=fVP5_lOr-X227DF2&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>)
+
 </div>
 E aí, galera? Vamos falar de um projeto maneiro que eu fiz: um sistema bancário com cara de game, só que é tudo programado em Python usando Tkinter. Simples, direto e, o melhor, cheio de funções de banco pra você brincar de gerente!
 
