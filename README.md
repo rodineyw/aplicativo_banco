@@ -1,5 +1,5 @@
 <div align="center">
-<img src="/python.png" width="300" alt="Capa Python e Computador">
+<img src="/assets/python.png" width="300" alt="Capa Python e Computador">
 </div>
 E aí, galera? Vamos falar de um projeto maneiro que eu fiz: um sistema bancário com cara de game, só que é tudo programado em Python usando Tkinter. Simples, direto e, o melhor, cheio de funções de banco pra você brincar de gerente!
 
